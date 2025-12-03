@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input/Output con Logo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            max-width: 900px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .section {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 200px;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            resize: vertical;
+            transition: border-color 0.3s;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .output {
+            width: 100%;
+            min-height: 200px;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            font-size: 16px;
+            overflow-y: auto;
+            word-wrap: break-word;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .logo-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            cursor: pointer;
+        }
+
+        .logo-container.show {
+            display: flex;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .logo-container img {
+            max-width: 80vw;
+            max-height: 80vh;
+            width: auto;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Input y Output con Logo</h1>
+        
+        <div class="content">
+            <div class="section">
+                <h2>📝 Entrada</h2>
+                <textarea name="userInput" id="userInput" placeholder="Escribe algo aquí..." oninput="updateOutput()"></textarea>
+            </div>
+            
+            <div class="section">
+                <h2>📤 Salida</h2>
+                <div class="output" id="output">Lo que escribas aparecerá aquí...</div>
+            </div>
+        </div>
+        
+        <div class="button-container">
+            <button type="button" onclick="toggleLogo()">🎨 Mostrar Logo</button>
+        </div>
+        
+        <div class="logo-container" id="logoContainer">
+            <img src="logo.png" alt="Logo" id="logo">
+        </div>
+    </div>
+
+    <script>
+        function updateOutput() {
+            const input = document.getElementById('userInput').value;
+            const output = document.getElementById('output');
+            output.textContent = input || 'Lo que escribas aparecerá aquí...';
+        }
+
+        function toggleLogo() {
+            const logoContainer = document.getElementById('logoContainer');
+            logoContainer.classList.toggle('show');
+        }
+    </script>
+</body>
+</html>
